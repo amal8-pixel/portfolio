@@ -1,86 +1,136 @@
-const projectsData = [
-    {
-        name: "Hash Plus",
-        description: "تطبيق Flutter لعرض منتجات بواجهة عصرية. يتميز بتجربة مستخدم سلسة وتنقل بديهي بين الأقسام.",
-        screens: "Home Page, Cart, Favorites, Profile",
-        tech: ["Flutter", "Dart", "UI Design"],
-        status: "Completed"
-    },
-    {
-        name: "Healthy Food App",
-        description: "تطبيق يعرض وجبات صحية مع السعر ونبذة عن كل طبق. يركز على العرض البصري الجذاب للطعام.",
-        screens: "Splash Screen, Home Page",
-        tech: ["Flutter", "Dart", "Grid Layout"],
-        status: "Completed"
-    },
-    {
-        name: "Water Tracker",
-        description: "تطبيق لتتبع كمية شرب الماء اليومية وتحفيز المستخدم للوصول للهدف. تصميم بسيط وعملي.",
-        screens: "Home, Tracker, Settings",
-        tech: ["Flutter", "Dart", "Local Storage"],
-        status: "Completed / Extendable"
-    },
-    {
-        name: "Login System",
-        description: "تنفيذ لشاشات تسجيل دخول متعددة بتصاميم مختلفة (Modern, Clean, Dark). جاهزة للربط مع Backend.",
-        screens: "Login, Register, Forgot Password",
-        tech: ["Flutter", "Dart", "Form Validation"],
-        status: "Completed"
-    }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
-    renderProjects();
-    setupMobileMenu();
-});
 
-function renderProjects() {
-    const container = document.getElementById('projects-container');
-    
-    projectsData.forEach(project => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        
-        // Generate tech tags HTML
-        const techHtml = project.tech.map(t => `<span>${t}</span>`).join('');
-        
-        card.innerHTML = `
-            <div class="project-header">
-                <div class="project-icon">
-                    <i class="far fa-folder"></i>
-                </div>
-                <div class="project-links">
-                    <a href="#" aria-label="GitHub Link"><i class="fab fa-github"></i></a>
-                    <a href="#" aria-label="External Link"><i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </div>
-            <div class="project-body">
-                <h3 class="project-title">${project.name}</h3>
-                <p class="project-desc">
-                    ${project.description}<br><br>
-                    <strong>الشاشات:</strong> ${project.screens}
-                </p>
-                <div class="project-tech-list">
-                    ${techHtml}
-                </div>
-                <div class="project-status">
-                    ${project.status}
-                </div>
-            </div>
-        `;
-        
-        container.appendChild(card);
-    });
-}
+    // --- Typing Animation ---
+    const typingText = document.getElementById('typing-text');
+    const phrases = ["Flutter Developer", "UI Focused", "App Builder"];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 100;
 
-function setupMobileMenu() {
-    const btn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('.navbar');
-    
-    if(btn && nav) {
-        btn.addEventListener('click', () => {
-            const isFlex = nav.style.display === 'flex';
-            nav.style.display = isFlex ? 'none' : 'flex';
-        });
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
+
+        if (isDeleting) {
+            typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            typeSpeed = 50;
+        } else {
+            typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+            typeSpeed = 100;
+        }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            isDeleting = true;
+            typeSpeed = 2000; // Pause at end
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500; // Pause before new word
+        }
+
+        setTimeout(type, typeSpeed);
     }
-}
+
+    type();
+
+
+    // --- Particle System ---
+    const canvas = document.getElementById('particles-js');
+    const ctx = canvas.getContext('2d');
+
+    let particlesArray;
+
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2; // Tiny particles
+            this.speedX = (Math.random() * 1) - 0.5;
+            this.speedY = (Math.random() * 1) - 0.5;
+            this.color = 'rgba(100, 255, 218, 0.5)'; // Cyan with opacity
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            // Check boundaries
+            if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+            if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+        }
+
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particlesArray = [];
+        const numberOfParticles = (canvas.width * canvas.height) / 9000;
+        for (let i = 0; i < numberOfParticles; i++) {
+            particlesArray.push(new Particle());
+        }
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+
+            // Draw connections
+            for (let j = i; j < particlesArray.length; j++) {
+                const dx = particlesArray[i].x - particlesArray[j].x;
+                const dy = particlesArray[i].y - particlesArray[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(100, 255, 218, ${1 - distance / 100})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                    ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animateParticles);
+    }
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+    });
+
+    initParticles();
+    animateParticles();
+
+
+    // --- Scroll Animations ---
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.fade-in-up');
+    animatedElements.forEach(el => observer.observe(el));
+
+});
