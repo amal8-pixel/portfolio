@@ -126,12 +126,39 @@ h3 {
     margin: 0 auto;
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .logo {
     color: var(--primary);
     font-family: var(--font-mono);
     font-size: 1.5rem;
     text-decoration: none;
     font-weight: 700;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.lang-btn:hover {
+    color: var(--primary);
+    text-shadow: 0 0 8px rgba(100, 255, 218, 0.5);
+    background: rgba(100, 255, 218, 0.05);
 }
 
 .nav-links {
