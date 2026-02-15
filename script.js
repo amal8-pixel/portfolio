@@ -35,7 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
             project_3_desc: "Daily water intake tracking with reminders and history statistics.",
             project_local_storage: "Local Storage",
             project_notifications: "Notifications",
-            footer_text: "Designed & Built by"
+            footer_text: "Designed & Built by",
+            section_contact: "Contact_Me",
+            contact_title: "Get In Touch",
+            contact_name: "Name",
+            contact_email: "Email",
+            contact_message: "Message",
+            btn_send: "Send Message",
+            section_resume: "Resume",
+            resume_summary_title: "Professional Summary",
+            resume_summary_text: "A professional Flutter Developer available for freelance projects. I specialize in crafting high-quality, pixel-perfect UIs and writing clean, maintainable code. I am passionate about transforming your ideas into robust, user-friendly mobile applications.",
+            resume_skills_title: "Technical Skills",
+            resume_education_title: "Education",
+            edu_degree: "Diploma in Computer Science",
+            edu_gpa: "GPA"
         },
         ar: {
             nav_about: "من أنا",
@@ -70,7 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
             project_3_desc: "تتبع شرب الماء اليومي مع تذكيرات وإحصائيات تاريخية.",
             project_local_storage: "تخزين محلي",
             project_notifications: "إشعارات",
-            footer_text: "تصميم وتطوير"
+            footer_text: "تصميم وتطوير",
+            section_contact: "تواصل_معي",
+            contact_title: "ابقى على تواصل",
+            contact_name: "الاسم",
+            contact_email: "البريد الإلكتروني",
+            contact_message: "الرسالة",
+            btn_send: "إرسال الرسالة",
+            section_resume: "السيرة_الذاتية",
+            resume_summary_title: "الملخص المهني",
+            resume_summary_text: "مطورة فلاتر (Flutter Developer) شغوفة وطموحة، أمتلك مهارات قوية في بناء تطبيقات متكاملة واجهات مستخدم جذابة. متاحة للعمل كمستقلة (Freelance). حيث أسعى لتحويل أفكار العملاء إلى واقع تقني ملموس بأعلى معايير الجودة والدقة. أؤمن بالتعلم المستمر والالتزام بتسليم مشاريع برمجية نظيفة وقابلة للتطوير",
+            resume_skills_title: "المهارات التقنية",
+            resume_education_title: "التعليم",
+            edu_degree: "دبلوم في علوم الحاسب (برمجة)",
+            edu_gpa: "المعدل التراكمي"
         }
     };
 
